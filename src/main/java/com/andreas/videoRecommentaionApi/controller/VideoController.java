@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -47,6 +48,7 @@ public class VideoController {
             throws ResourceNotFoundException {
         videoRepository.findById(videoId)
                 .orElseThrow(() -> new ResourceNotFoundException(" Video not found : " + videoId));
+        Video.deletedVideosId.add(videoId);
         videoRepository.deleteById(videoId);
         return ResponseEntity.ok().build();
     }
@@ -67,7 +69,18 @@ public class VideoController {
     }
 
     // Get videos from sample title "vid"
+    @GetMapping("/videos/title/{title}")
+    public List<Video> getAllVideoByTitle(@PathVariable(value = "title") String videoTitle) {
+        List<Video> videos = videoRepository.findAll();
+        return videos.stream()
+                .filter(video -> video.getTitle().contains(videoTitle))
+                .collect(Collectors.toList());
+
+    }
 
     // Get ID of deleted videos
+    public List<String> getDeletedVideoIds(){
+        return Video.deletedVideosId;
+    }
 
 }

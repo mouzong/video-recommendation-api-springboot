@@ -3,11 +3,14 @@ package com.andreas.videoRecommentaionApi.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "videos")
 public class Video {
+
+     public static List<String> deletedVideosId = new ArrayList<>();
 
      @Id
      @GeneratedValue(generator = "uuid")
