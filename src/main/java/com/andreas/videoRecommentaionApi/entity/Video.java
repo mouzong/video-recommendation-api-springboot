@@ -1,4 +1,4 @@
-package com.andreas.videoRecommentaionApi.model;
+package com.andreas.videoRecommentaionApi.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "videos")
 public class Video {
 
-     public static List<String> deletedVideosId = new ArrayList<>();
+     public static List<String> DELETED_IDS = new ArrayList<>();
 
      @Id
      @GeneratedValue(generator = "uuid")

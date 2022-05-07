@@ -1,8 +1,8 @@
 package com.andreas.videoRecommentaionApi.controller;
 
 import com.andreas.videoRecommentaionApi.error.ResourceNotFoundException;
-import com.andreas.videoRecommentaionApi.model.Video;
-import com.andreas.videoRecommentaionApi.repository.VideoRepository;
+import com.andreas.videoRecommentaionApi.entity.Video;
+import com.andreas.videoRecommentaionApi.service.VideoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,76 +11,62 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/videos")
 public class VideoController {
-    private final VideoRepository videoRepository;
+    private final VideoService videoService;
 
-    public VideoController(VideoRepository videoRepository) {
-        this.videoRepository = videoRepository;
+    public VideoController(VideoService videoService) {
+        this.videoService = videoService;
     }
 
+
     // Create a video
-    @PostMapping("/videos")
-    public Video createVideo(@Validated @RequestBody Video video) {
-        return videoRepository.save(video);
+    @PostMapping
+    public Video create(@Validated @RequestBody Video video) {
+        return videoService.create(video);
     }
 
 
     // Get a video by its ID
-    @GetMapping("/videos/{id}")
-    public ResponseEntity<Video> getVideoById(@PathVariable(value = "id") String videoId)
+    @GetMapping("/{id}")
+    public ResponseEntity<Video> getById(@PathVariable(value = "id") String videoId)
             throws ResourceNotFoundException {
-        Video video = videoRepository.findById(videoId)
-                .orElseThrow(() -> new ResourceNotFoundException("Pas de video trouvée avec ID : " + videoId));
-        return ResponseEntity.ok().body(video);
+      return videoService.getById(videoId);
     }
 
     // Get all videos
-    @GetMapping("/videos")
-    public List<Video> getAllVideos() {
-        return videoRepository.findAll();
+    @GetMapping
+    public List<Video> getAll() {
+        return videoService.getAll();
     }
 
 
     // Delete a video by ID
-    @DeleteMapping("/videos/{id}")
-    public ResponseEntity deleteVideo(@PathVariable(value = "id") String videoId)
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable(value = "id") String videoId)
             throws ResourceNotFoundException {
-        videoRepository.findById(videoId)
-                .orElseThrow(() -> new ResourceNotFoundException(" Video not found : " + videoId));
-        Video.deletedVideosId.add(videoId);
-        videoRepository.deleteById(videoId);
-        return ResponseEntity.ok().build();
+        return videoService.delete(videoId);
     }
 
 
     // Update a video
-    @PutMapping("/videos/{id}")
-    public ResponseEntity<Video> updateVideo(@PathVariable(value = "id") String videoId, @RequestBody Video video)
+    @PutMapping("/{id}")
+    public ResponseEntity<Video> update(@PathVariable(value = "id") String videoId, @RequestBody Video video)
             throws ResourceNotFoundException {
-        Video videoFound = videoRepository.findById(videoId)
-                .orElseThrow(() -> new ResourceNotFoundException(" Video not found : " + videoId));
-        videoFound.setLabels(video.getLabels());
-        videoFound.setTitle(video.getTitle());
-        videoRepository.save(videoFound);
-
-        return ResponseEntity.ok().body(videoFound);
+        return  videoService.update(videoId,video);
 
     }
 
     // Get videos from sample title "vid"
     @GetMapping("/videos/title/{title}")
-    public List<Video> getAllVideoByTitle(@PathVariable(value = "title") String videoTitle) {
-        List<Video> videos = videoRepository.findAll();
-        return videos.stream()
-                .filter(video -> video.getTitle().contains(videoTitle))
-                .collect(Collectors.toList());
+    public List<Video> getAllByTitle(@PathVariable(value = "title") String videoTitle) {
+        return videoService.getAllByTitle(videoTitle);
 
     }
 
     // Get ID of deleted videos
-    public List<String> getDeletedVideoIds(){
-        return Video.deletedVideosId;
+    public List<String> getDeletedIds() {
+        return videoService.getDeletedIds();
     }
 
 }
