@@ -8,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/videos")
@@ -31,7 +30,7 @@ public class VideoController {
     @GetMapping("/{id}")
     public ResponseEntity<Video> getById(@PathVariable(value = "id") String videoId)
             throws ResourceNotFoundException {
-      return videoService.getById(videoId);
+        return videoService.getById(videoId);
     }
 
     // Get all videos
@@ -53,12 +52,12 @@ public class VideoController {
     @PutMapping("/{id}")
     public ResponseEntity<Video> update(@PathVariable(value = "id") String videoId, @RequestBody Video video)
             throws ResourceNotFoundException {
-        return  videoService.update(videoId,video);
+        return videoService.update(videoId, video);
 
     }
 
     // Get videos from sample title "vid"
-    @GetMapping("/videos/title/{title}")
+    @GetMapping("/title/{title}")
     public List<Video> getAllByTitle(@PathVariable(value = "title") String videoTitle) {
         return videoService.getAllByTitle(videoTitle);
 
