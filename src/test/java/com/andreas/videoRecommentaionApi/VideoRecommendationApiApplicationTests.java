@@ -11,13 +11,21 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Testcontainers
 class VideoRecommendationApiApplicationTests {
+
+	@Container
+	private static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer("postgres:latest");
+
 	@Autowired
 	private VideoRepository videoRepository;
 
@@ -27,6 +35,11 @@ class VideoRecommendationApiApplicationTests {
 	// given/when/then format BDD style
 	@Test
 	public void givenVideos_whenGetAllVideo_thenListOfVideos() throws Exception {
+		System.out.println(postgreSQLContainer.getDatabaseName());
+		System.out.println(postgreSQLContainer.getPassword());
+		System.out.println(postgreSQLContainer.getUsername());
+		System.out.println(postgreSQLContainer.getJdbcUrl());
+
 		// given - setup precondition
 		List<Video> videos = List.of(
 				Video.builder().id(String.valueOf(UUID.randomUUID())).title("No time to die").labels(List.of("James Bond", "007")).build(),
