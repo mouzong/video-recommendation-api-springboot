@@ -17,7 +17,7 @@ public interface VideoService {
 
     public ResponseEntity delete(String videoId) throws ResourceNotFoundException;
 
-    public ResponseEntity<Video> update(String videoId, Video video) throws ResourceNotFoundException;
+    public ResponseEntity<Video> update(Video video) throws ResourceNotFoundException;
 
     public List<Video> getAllByTitle(String videoTitle);
 }

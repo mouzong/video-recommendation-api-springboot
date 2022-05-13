@@ -49,10 +49,10 @@ public class VideoController {
 
 
     // Update a video
-    @PutMapping("/{id}")
-    public ResponseEntity<Video> update(@PathVariable(value = "id") String videoId, @RequestBody Video video)
+    @PutMapping
+    public ResponseEntity<Video> update(@RequestBody Video video)
             throws ResourceNotFoundException {
-        return videoService.update(videoId, video);
+        return videoService.update(video);
 
     }
 
