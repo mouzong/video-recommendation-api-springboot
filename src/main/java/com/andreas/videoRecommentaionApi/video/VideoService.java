@@ -1,6 +1,5 @@
-package com.andreas.videoRecommentaionApi.service;
+package com.andreas.videoRecommentaionApi.video;
 
-import com.andreas.videoRecommentaionApi.entity.Video;
 import com.andreas.videoRecommentaionApi.error.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 

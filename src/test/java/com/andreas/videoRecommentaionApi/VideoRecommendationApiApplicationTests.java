@@ -1,7 +1,7 @@
 package com.andreas.videoRecommentaionApi;
 
-import com.andreas.videoRecommentaionApi.entity.Video;
-import com.andreas.videoRecommentaionApi.repository.VideoRepository;
+import com.andreas.videoRecommentaionApi.video.Video;
+import com.andreas.videoRecommentaionApi.video.VideoRepository;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

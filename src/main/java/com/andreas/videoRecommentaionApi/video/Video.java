@@ -1,4 +1,4 @@
-package com.andreas.videoRecommentaionApi.entity;
+package com.andreas.videoRecommentaionApi.video;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

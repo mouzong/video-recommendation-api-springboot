@@ -1,8 +1,8 @@
-package com.andreas.videoRecommentaionApi.controller;
+package com.andreas.videoRecommentaionApi.video;
 
 import com.andreas.videoRecommentaionApi.error.ResourceNotFoundException;
-import com.andreas.videoRecommentaionApi.entity.Video;
-import com.andreas.videoRecommentaionApi.service.VideoService;
+import com.andreas.videoRecommentaionApi.video.Video;
+import com.andreas.videoRecommentaionApi.video.VideoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
