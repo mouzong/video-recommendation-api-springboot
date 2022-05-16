@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface VideoService {
-    public Video create(Video video);
+    public ResponseEntity<VideoDTO> create(Video video);
 
     public List<Video> getAll();
 

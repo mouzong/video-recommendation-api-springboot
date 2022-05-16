@@ -21,7 +21,8 @@ public class VideoController {
 
     // Create a video
     @PostMapping
-    public Video create(@Validated @RequestBody Video video) {
+    public ResponseEntity<VideoDTO> create(@Validated @RequestBody Video video) {
+
         return videoService.create(video);
     }
 

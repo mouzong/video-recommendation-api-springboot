@@ -1,6 +1,7 @@
 package com.andreas.videoRecommentaionApi.video;
 
 import com.andreas.videoRecommentaionApi.error.ResourceNotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,13 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Video create(Video video) {
-        return videoRepository.save(video);
+    public ResponseEntity<VideoDTO> create(Video video) {
+        videoRepository.save(video);
+        VideoDTO videoDTO = new VideoDTO();
+        BeanUtils.copyProperties(video, videoDTO);
+
+        return ResponseEntity.ok(videoDTO);
+
     }
 
     @Override
