@@ -8,7 +8,7 @@ import java.util.List;
 public interface VideoService {
     public ResponseEntity<VideoDTO> create(Video video);
 
-    public List<Video> getAll();
+    public List<VideoDTO> getAll();
 
     public List<String> getDeletedIds();
 

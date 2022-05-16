@@ -20,6 +20,12 @@ public class VideoServiceImpl implements VideoService {
         this.videoRepository = videoRepository;
     }
 
+    public VideoDTO convertVideoEntityToVideoDto(Video video){
+        VideoDTO videoDTO = new VideoDTO();
+        BeanUtils.copyProperties(video, videoDTO);
+        return videoDTO;
+    }
+
     @Override
     public ResponseEntity<VideoDTO> create(Video video) {
         videoRepository.save(video);
@@ -31,8 +37,12 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<Video> getAll() {
-        return videoRepository.findAll();
+    public List<VideoDTO> getAll() {
+
+        return videoRepository.findAll()
+                .stream()
+                .map(this::convertVideoEntityToVideoDto)
+                .collect(Collectors.toList());
     }
 
     @Override
