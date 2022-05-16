@@ -11,9 +11,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Builder
 @Entity
-@Table(name = "videos")
+@Table(name = "video")
 public class Video {
 
      public static List<String> DELETED_IDS = new ArrayList<>();

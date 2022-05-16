@@ -14,9 +14,10 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Data
+//@Builder
 @Entity
-@Table(name = "series")
+@Table(name = "serie")
 public class Serie extends Video {
 
     @Id
