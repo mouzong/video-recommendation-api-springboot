@@ -3,7 +3,6 @@ package com.andreas.videoRecommentaionApi.video;
 import com.andreas.videoRecommentaionApi.error.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -100,10 +99,11 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public List<Video> getAllByTitle(String videoTitle) {
+    public List<VideoDTO> getAllByTitle(String videoTitle) {
         List<Video> videos = videoRepository.findAll();
         return videos.stream()
                 .filter(video -> video.getTitle().contains(videoTitle))
+                .map(this::convertVideoEntityToVideoDto)
                 .collect(Collectors.toList());
     }
 }

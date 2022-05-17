@@ -59,7 +59,7 @@ public class VideoController {
 
     // Get videos from sample title "vid"
     @GetMapping("/title/{title}")
-    public List<Video> getAllByTitle(@PathVariable(value = "title") String videoTitle) {
+    public List<VideoDTO> getAllByTitle(@PathVariable(value = "title") String videoTitle) {
         return videoService.getAllByTitle(videoTitle);
 
     }
