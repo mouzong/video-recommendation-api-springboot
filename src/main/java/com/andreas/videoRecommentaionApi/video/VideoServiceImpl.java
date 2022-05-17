@@ -26,8 +26,9 @@ public class VideoServiceImpl implements VideoService {
     }
 
     public VideoDTO convertVideoEntityToVideoDto(Video video) {
+
         VideoDTO videoDTO = new VideoDTO();
-        BeanUtils.copyProperties(video, videoDTO);
+        videoDTO = modelMapper.map(video, VideoDTO.class);
         return videoDTO;
     }
 

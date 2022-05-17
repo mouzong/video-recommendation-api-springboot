@@ -36,14 +36,14 @@ public class VideoController {
 
     // Get all videos
     @GetMapping
-    public List<Video> getAll() {
+    public List<VideoDTO> getAll() {
         return videoService.getAll();
     }
 
 
     // Delete a video by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable(value = "id") String videoId)
+    public ResponseEntity<VideoDTO> delete(@PathVariable(value = "id") String videoId)
             throws ResourceNotFoundException {
         return videoService.delete(videoId);
     }
