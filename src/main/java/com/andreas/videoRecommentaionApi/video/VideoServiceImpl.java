@@ -37,6 +37,16 @@ public class VideoServiceImpl implements VideoService {
         return videoDTO;
     }
 
+    public Video convertVideoDtoToVideoEntity(VideoDTO videoDTO) {
+        // configuration to enable referenced fields to be mapped correctly
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.LOOSE);
+
+        Video video = new Video();
+        video = modelMapper.map(videoDTO, Video.class);
+        return video;
+    }
+
     @Override
     public ResponseEntity<VideoDTO> create(Video video) {
         videoRepository.save(video);
