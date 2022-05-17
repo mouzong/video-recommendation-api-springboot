@@ -1,7 +1,9 @@
 package com.andreas.videoRecommentaionApi.video;
 
 import com.andreas.videoRecommentaionApi.error.ResourceNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +14,18 @@ import java.util.stream.Collectors;
 @Service
 public class VideoServiceImpl implements VideoService {
 
-
+    @Autowired
     private final VideoRepository videoRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     public VideoServiceImpl(VideoRepository videoRepository) {
 
         this.videoRepository = videoRepository;
     }
 
-    public VideoDTO convertVideoEntityToVideoDto(Video video){
+    public VideoDTO convertVideoEntityToVideoDto(Video video) {
         VideoDTO videoDTO = new VideoDTO();
         BeanUtils.copyProperties(video, videoDTO);
         return videoDTO;
