@@ -51,7 +51,7 @@ public class VideoController {
 
     // Update a video
     @PutMapping
-    public ResponseEntity<Video> update(@RequestBody Video video)
+    public ResponseEntity<VideoDTO> update(@RequestBody Video video)
             throws ResourceNotFoundException {
         return videoService.update(video);
 

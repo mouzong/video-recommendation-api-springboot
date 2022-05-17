@@ -88,14 +88,15 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     @Transactional
-    public ResponseEntity<Video> update(Video video) throws ResourceNotFoundException {
+    public ResponseEntity<VideoDTO> update(Video video) throws ResourceNotFoundException {
         Video videoFound = videoRepository.findById(video.getId())
                 .orElseThrow(() -> new ResourceNotFoundException(" Video not found : " + video.getId()));
         videoFound.setLabels(video.getLabels());
         videoFound.setTitle(video.getTitle());
         videoRepository.save(videoFound);
-
-        return ResponseEntity.ok().body(videoFound);
+        VideoDTO videoDTO = new VideoDTO();
+        videoDTO = modelMapper.map(video, VideoDTO.class);
+        return ResponseEntity.ok().body(videoDTO);
     }
 
     @Override
