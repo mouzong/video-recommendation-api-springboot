@@ -2,6 +2,8 @@ package com.andreas.videoRecommentaionApi.video;
 
 import com.andreas.videoRecommentaionApi.error.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class VideoServiceImpl implements VideoService {
     }
 
     public VideoDTO convertVideoEntityToVideoDto(Video video) {
+        // configuration to enable referenced fields to be mapped correctly
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.LOOSE);
 
         VideoDTO videoDTO = new VideoDTO();
         videoDTO = modelMapper.map(video, VideoDTO.class);
