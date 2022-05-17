@@ -78,10 +78,13 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public ResponseEntity delete(String videoId) throws ResourceNotFoundException {
+    public ResponseEntity<VideoDTO> delete(String videoId) throws ResourceNotFoundException {
         videoRepository.findById(videoId)
                 .orElseThrow(() -> new ResourceNotFoundException(" Video not found : " + videoId));
         Video.DELETED_IDS.add(videoId);
+
+        VideoDTO videoDTO = new VideoDTO();
+        videoDTO = modelMapper.map(videoRepository.findById(videoId), VideoDTO.class);
         videoRepository.deleteById(videoId);
         return ResponseEntity.ok().build();
     }
