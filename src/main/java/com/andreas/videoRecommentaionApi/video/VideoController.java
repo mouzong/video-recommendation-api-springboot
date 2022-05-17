@@ -29,7 +29,7 @@ public class VideoController {
 
     // Get a video by its ID
     @GetMapping("/{id}")
-    public ResponseEntity<Video> getById(@PathVariable(value = "id") String videoId)
+    public ResponseEntity<VideoDTO> getById(@PathVariable(value = "id") String videoId)
             throws ResourceNotFoundException {
         return videoService.getById(videoId);
     }

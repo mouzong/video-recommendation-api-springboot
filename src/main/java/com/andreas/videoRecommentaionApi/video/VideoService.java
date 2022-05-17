@@ -12,7 +12,7 @@ public interface VideoService {
 
     public List<String> getDeletedIds();
 
-    public ResponseEntity<Video> getById(String videoId) throws ResourceNotFoundException;
+    public ResponseEntity<VideoDTO> getById(String videoId) throws ResourceNotFoundException;
 
     public ResponseEntity<VideoDTO> delete(String videoId) throws ResourceNotFoundException;
 
