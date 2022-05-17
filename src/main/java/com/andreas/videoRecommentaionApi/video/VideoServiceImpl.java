@@ -21,11 +21,6 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public VideoServiceImpl(VideoRepository videoRepository) {
-
-        this.videoRepository = videoRepository;
-    }
-
     public VideoDTO convertVideoEntityToVideoDto(Video video) {
         // configuration to enable referenced fields to be mapped correctly
         modelMapper.getConfiguration()
@@ -45,6 +40,12 @@ public class VideoServiceImpl implements VideoService {
         video = modelMapper.map(videoDTO, Video.class);
         return video;
     }
+
+    public VideoServiceImpl(VideoRepository videoRepository) {
+
+        this.videoRepository = videoRepository;
+    }
+
 
     @Override
     public ResponseEntity<VideoDTO> create(Video video) {

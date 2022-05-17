@@ -22,7 +22,7 @@ public class Serie extends Video {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @Column(name = "numberOfEpisodes", nullable = false)
+    @Column(name = "numberOfEpisodes", nullable = true)
     private int number_of_episodes;
 
 }
