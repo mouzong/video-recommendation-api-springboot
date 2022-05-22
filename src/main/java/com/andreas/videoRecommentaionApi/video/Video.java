@@ -9,8 +9,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "video")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "video_type", discriminatorType = DiscriminatorType.INTEGER)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "video_type", discriminatorType = DiscriminatorType.INTEGER)
 public class Video {
 
      public static List<String> DELETED_IDS = new ArrayList<>();

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "serie")
 @DiscriminatorValue("1")
-public class Serie extends Video {
+public class Serie extends  {
 
 
 
