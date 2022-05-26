@@ -1,21 +1,30 @@
 package com.andreas.videoRecommentaionApi.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "videos")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+        name = "VIDEO_TYPE",
+        discriminatorType = DiscriminatorType.STRING
+)
 public class Video {
 
     @Id
     @GeneratedValue
     private UUID videiId;
 
-    @Column(name = "title")
-    private String title;
+    protected String title;
 
-    @Column(name = "labels")
     @ElementCollection(targetClass = String.class)
-    private List<String> labels;
+    protected List<String> labels;
 }
