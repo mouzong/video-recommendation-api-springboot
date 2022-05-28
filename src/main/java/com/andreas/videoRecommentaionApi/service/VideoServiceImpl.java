@@ -5,7 +5,11 @@ import com.andreas.videoRecommentaionApi.entity.Video;
 import com.andreas.videoRecommentaionApi.repository.VideoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VideoServiceImpl implements VideoService{
@@ -26,5 +30,15 @@ public class VideoServiceImpl implements VideoService{
         Video mappedVideoEntity = new Video();
         mappedVideoEntity = modelMapper.map(videoDto, Video.class);
         return mappedVideoEntity;
+    }
+
+    @Override
+    public ResponseEntity<List<VideoDto>> getAll() {
+        List<VideoDto> videos = videoRepository.findAll()
+                .stream()
+                .map(video -> this.convertVideoEntityToVideoDto(video))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(videos);
     }
 }
