@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface VideoService {
     public ResponseEntity<List<VideoDto>> getAll();
+
+    public void create(VideoDto videoDto);
 }

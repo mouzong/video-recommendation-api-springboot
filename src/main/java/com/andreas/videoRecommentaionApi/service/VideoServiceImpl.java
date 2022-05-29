@@ -2,6 +2,7 @@ package com.andreas.videoRecommentaionApi.service;
 
 import com.andreas.videoRecommentaionApi.dto.VideoDto;
 import com.andreas.videoRecommentaionApi.entity.Video;
+import com.andreas.videoRecommentaionApi.mapper.VideoMapper;
 import com.andreas.videoRecommentaionApi.repository.VideoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +19,17 @@ public class VideoServiceImpl implements VideoService{
     private VideoRepository videoRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
-
-    public VideoDto convertVideoEntityToVideoDto(Video video){
-        VideoDto mappedVideoDto = new VideoDto();
-        mappedVideoDto = modelMapper.map(video, VideoDto.class);
-        return mappedVideoDto;
-    }
-
-    public Video convertVideoDtoToVideoEntity(VideoDto videoDto){
-        Video mappedVideoEntity = new Video();
-        mappedVideoEntity = modelMapper.map(videoDto, Video.class);
-        return mappedVideoEntity;
-    }
+    private VideoMapper videoMapper;
 
     @Override
     public ResponseEntity<List<VideoDto>> getAll() {
-        List<VideoDto> videos = videoRepository.findAll()
-                .stream()
-                .map(video -> this.convertVideoEntityToVideoDto(video))
-                .collect(Collectors.toList());
+        List<VideoDto> videos = videoMapper.entityToDto(videoRepository.findAll());
 
         return ResponseEntity.ok().body(videos);
+    }
+
+    @Override
+    public void create(VideoDto videoDto) {
+
     }
 }
