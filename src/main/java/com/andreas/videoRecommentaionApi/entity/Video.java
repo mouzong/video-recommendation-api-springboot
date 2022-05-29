@@ -3,6 +3,7 @@ package com.andreas.videoRecommentaionApi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,4 +30,10 @@ public class Video {
     @Column(name = "titles")
     @ElementCollection(targetClass = String.class)
     protected List<String> labels;
+
+    private static List<String> deletedVideoId;
+
+    static {
+        deletedVideoId = new ArrayList<>();
+    }
 }
