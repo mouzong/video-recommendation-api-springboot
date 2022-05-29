@@ -21,10 +21,12 @@ public class Video {
 
     @Id
     @GeneratedValue
-    private UUID videiId;
+    private UUID id;
 
+    @Column(name = "title")
     protected String title;
 
+    @Column(name = "titles")
     @ElementCollection(targetClass = String.class)
     protected List<String> labels;
 }

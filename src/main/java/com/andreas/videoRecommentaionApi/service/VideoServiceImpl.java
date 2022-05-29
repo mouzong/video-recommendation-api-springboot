@@ -4,16 +4,14 @@ import com.andreas.videoRecommentaionApi.dto.VideoDto;
 import com.andreas.videoRecommentaionApi.entity.Video;
 import com.andreas.videoRecommentaionApi.mapper.VideoMapper;
 import com.andreas.videoRecommentaionApi.repository.VideoRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class VideoServiceImpl implements VideoService{
+public class VideoServiceImpl implements VideoService {
 
     @Autowired
     private VideoRepository videoRepository;
@@ -29,7 +27,8 @@ public class VideoServiceImpl implements VideoService{
     }
 
     @Override
-    public void create(VideoDto videoDto) {
-
+    public ResponseEntity<VideoDto> create(Video video) {
+        VideoDto videoDto = videoMapper.entityToDto(videoRepository.save(video));
+        return ResponseEntity.ok(videoDto);
     }
 }

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 public class VideoDto {
-    private UUID videoId;
+    private UUID id;
     private String title;
     private List<String> labels;
 }

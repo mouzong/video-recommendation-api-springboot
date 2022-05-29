@@ -1,6 +1,7 @@
 package com.andreas.videoRecommentaionApi.controller;
 
 import com.andreas.videoRecommentaionApi.dto.VideoDto;
+import com.andreas.videoRecommentaionApi.entity.Video;
 import com.andreas.videoRecommentaionApi.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class VideoController {
     }
 
     @PostMapping
-    public void create(VideoDto videoDto){
-        return videoService.create(videoDto);
+    public ResponseEntity<VideoDto> create(@RequestBody Video video){
+        return videoService.create(video);
     }
 }

@@ -12,16 +12,17 @@ import java.util.stream.Collectors;
 @Component
 public class VideoMapper {
 
-    @Autowired
-    private ModelMapper modelMapper;
+
 
     public VideoDto entityToDto(Video video){
+        ModelMapper modelMapper = new ModelMapper();
         VideoDto videoDto = new VideoDto();
         videoDto = modelMapper.map(video, VideoDto.class);
         return videoDto;
     }
 
     public Video dtoToEntity(VideoDto videoDto){
+        ModelMapper modelMapper = new ModelMapper();
         Video video = new Video();
         video = modelMapper.map(videoDto, Video.class);
         return video;
