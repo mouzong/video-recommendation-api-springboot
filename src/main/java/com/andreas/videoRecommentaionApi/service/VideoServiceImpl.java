@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -39,5 +40,17 @@ public class VideoServiceImpl implements VideoService {
         VideoDto videoDto = videoMapper.entityToDto(videoRepository.findById(UUID.fromString(videoId))
                 .orElseThrow(()-> new ResourceNotFoundException("Video with ID : "+videoId+" not found")));
         return ResponseEntity.ok(videoDto);
+    }
+
+    @Override
+    public List<VideoDto> getByTitle(String videoTitle) {
+        List<Video> videos = videoRepository.findAll()
+                .stream()
+                .filter(video -> video.getTitle().contains(videoTitle))
+                .collect(Collectors.toList());
+
+        List<VideoDto> videoDtos = videoMapper.entityToDto(videos);
+
+        return videoDtos;
     }
 }

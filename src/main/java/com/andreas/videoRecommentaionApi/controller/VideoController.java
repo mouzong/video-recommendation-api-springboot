@@ -41,4 +41,10 @@ public class VideoController {
     public ResponseEntity<VideoDto> getById(@PathVariable("id") String videoId) throws ResourceNotFoundException {
         return videoService.getById(videoId);
     }
+
+    @GetMapping("/titles/{title}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<VideoDto> getByTitle(@PathVariable("title") String videoTitle){
+         return videoService.getByTitle(videoTitle);
+    }
 }

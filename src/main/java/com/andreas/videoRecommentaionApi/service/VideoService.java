@@ -14,4 +14,6 @@ public interface VideoService {
     public ResponseEntity<VideoDto> create(Video video);
 
     public ResponseEntity<VideoDto> getById(String videoId) throws ResourceNotFoundException;
+
+    public List<VideoDto> getByTitle(String videoTitle);
 }
