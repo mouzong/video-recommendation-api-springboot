@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -52,5 +54,15 @@ public class VideoServiceImpl implements VideoService {
         List<VideoDto> videoDtos = videoMapper.entityToDto(videos);
 
         return videoDtos;
+    }
+
+    @Override
+    public Map<String, Boolean> deleteById(String videoId) throws ResourceNotFoundException {
+        Video video = videoRepository.findById((UUID.fromString(videoId)))
+                .orElseThrow(
+                        ()-> new ResourceNotFoundException("Video with ID : "+videoId+" not found")
+                );
+
+        return new HashMap<>();
     }
 }

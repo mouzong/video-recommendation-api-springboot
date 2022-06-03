@@ -6,6 +6,7 @@ import com.andreas.videoRecommentaionApi.error.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface VideoService {
@@ -16,4 +17,6 @@ public interface VideoService {
     public ResponseEntity<VideoDto> getById(String videoId) throws ResourceNotFoundException;
 
     public List<VideoDto> getByTitle(String videoTitle);
+
+    public Map<String, Boolean> deleteById(String videoId) throws ResourceNotFoundException;
 }

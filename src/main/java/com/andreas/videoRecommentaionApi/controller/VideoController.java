@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -46,5 +47,11 @@ public class VideoController {
     @ResponseStatus(HttpStatus.OK)
     public List<VideoDto> getByTitle(@PathVariable("title") String videoTitle){
          return videoService.getByTitle(videoTitle);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Map<String, Boolean> deleteById(@PathVariable("id") String videoId) throws ResourceNotFoundException {
+        return videoService.deleteById(videoId);
     }
 }
