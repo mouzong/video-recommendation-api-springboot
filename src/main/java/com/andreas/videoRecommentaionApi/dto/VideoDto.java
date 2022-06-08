@@ -21,6 +21,10 @@ public class VideoDto {
         this.labels = labels;
     }
 
+    public VideoDto() {
+
+    }
+
     public UUID getId() {
         return id;
     }
